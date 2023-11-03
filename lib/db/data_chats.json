@@ -1,0 +1,40 @@
+{
+    "chats": [
+        {
+            "id": 0,
+            "name": "Some name 1"
+        },
+        {
+            "id": 1,
+            "name": "Some name 1"
+        },
+        {
+            "id": 2,
+            "name": "Some name 1"
+        },
+        {
+            "id": 3,
+            "name": "Some name 1"
+        },
+        {
+            "id": 4,
+            "name": "Some name 1"
+        },
+        {
+            "id": 5,
+            "name": "Some name 1"
+        },
+        {
+            "id": 6,
+            "name": "Some name 1"
+        },
+        {
+            "id": 7,
+            "name": "Some name 1"
+        },
+        {
+            "id": 9,
+            "name": "Some name 1"
+        }
+    ]
+}
