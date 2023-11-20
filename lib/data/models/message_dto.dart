@@ -1,15 +1,24 @@
 class MessageDTO {
   final int id;
-  final int chatId;
   final String text;
-  final BigInt time;
+  final String time;
+  final String sendler;
   final bool unread;
 
   MessageDTO({
     required this.id,
-    required this.chatId,
     required this.text,
     required this.time,
+    required this.sendler,
     required this.unread
   });
+  
+  factory MessageDTO.fromJson(Map<String, dynamic> json) => MessageDTO(
+    id: json["id"],
+    text: json["text"],
+    time: json["time"],
+    sendler: json["sendler"],
+    unread: json["unread"],
+  );
+
 }

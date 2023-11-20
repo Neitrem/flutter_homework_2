@@ -1,0 +1,212 @@
+{
+    "chats": [
+        {
+            "id": 0,
+            "name": "Some name 1",
+            "messages": [
+                {
+                    "id": 4,
+                    "text": "Some helpfull message 5",
+                    "time": "11:00 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 3,
+                    "text": "Some helpfull message 4",
+                    "time": "10:45 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 2,
+                    "text": "Some helpfull message 3",
+                    "time": "10:20 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 1,
+                    "text": "Some helpfull message 2",
+                    "time": "10:05 AM",
+                    "sendler": "other",
+                    "unread": false
+                },
+                {
+                    "id": 0,
+                    "text": "Some helpfull message 1",
+                    "time": "10:00 AM",
+                    "sendler": "you",
+                    "unread": false
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "Some name 2",
+            "messages": [
+                {
+                    "id": 4,
+                    "text": "Some helpfull message 5",
+                    "time": "11:00 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 3,
+                    "text": "Some helpfull message 4",
+                    "time": "10:45 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 2,
+                    "text": "Some helpfull message 3",
+                    "time": "10:20 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 1,
+                    "text": "Some helpfull message 2",
+                    "time": "10:05 AM",
+                    "sendler": "other",
+                    "unread": false
+                },
+                {
+                    "id": 0,
+                    "text": "Some helpfull message 1",
+                    "time": "10:00 AM",
+                    "sendler": "you",
+                    "unread": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Some name 3",
+            "messages": [
+                {
+                    "id": 4,
+                    "text": "Some helpfull message 5",
+                    "time": "11:00 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 3,
+                    "text": "Some helpfull message 4",
+                    "time": "10:45 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 2,
+                    "text": "Some helpfull message 3",
+                    "time": "10:20 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 1,
+                    "text": "Some helpfull message 2",
+                    "time": "10:05 AM",
+                    "sendler": "other",
+                    "unread": false
+                },
+                {
+                    "id": 0,
+                    "text": "Some helpfull message 1",
+                    "time": "10:00 AM",
+                    "sendler": "you",
+                    "unread": false
+                }
+            ]
+
+        },
+        {
+            "id": 3,
+            "name": "Some name 4",
+            "messages": [
+                {
+                    "id": 4,
+                    "text": "Some helpfull message 5",
+                    "time": "11:00 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 3,
+                    "text": "Some helpfull message 4",
+                    "time": "10:45 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 2,
+                    "text": "Some helpfull message 3",
+                    "time": "10:20 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 1,
+                    "text": "Some helpfull message 2",
+                    "time": "10:05 AM",
+                    "sendler": "other",
+                    "unread": false
+                },
+                {
+                    "id": 0,
+                    "text": "Some helpfull message 1",
+                    "time": "10:00 AM",
+                    "sendler": "you",
+                    "unread": false
+                }
+            ]
+
+        },
+        {
+            "id": 4,
+            "name": "Some name 5",
+            "messages": [
+                {
+                    "id": 4,
+                    "text": "Some helpfull message 5",
+                    "time": "11:00 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 3,
+                    "text": "Some helpfull message 4",
+                    "time": "10:45 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 2,
+                    "text": "Some helpfull message 3",
+                    "time": "10:20 AM",
+                    "sendler": "other",
+                    "unread": true
+                },
+                {
+                    "id": 1,
+                    "text": "Some helpfull message 2",
+                    "time": "10:05 AM",
+                    "sendler": "other",
+                    "unread": false
+                },
+                {
+                    "id": 0,
+                    "text": "Some helpfull message 1",
+                    "time": "10:00 AM",
+                    "sendler": "you",
+                    "unread": false
+                }
+            ]
+
+        }
+    ]
+}
