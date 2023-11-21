@@ -18,14 +18,16 @@ class ChatCubit extends Cubit<ChatState> {
       );
     } catch (e) {
       emit(
-        ChatError(error: e.toString()),
+        ChatError(error: e.toString(),),
       );
     }
   }
 
-  void update(List<ChatModel> chats) {
-    final data = _service.update(chats);
+  Future<void> update(List<ChatModel> chats) async {
+    _service.update(chats);
   }
 
-
+  Future<void> sendMessage(List<ChatModel> chats, String text, int chatId) async {
+    _service.sendMessage(chat)
+  }
 }
