@@ -57,7 +57,11 @@ class _ChatState extends State<ChatPage> {
                 void update() {
                   context.read<ChatCubit>().update(state.chats);
                 }
-                return ChatLIst(chats: state.chats, update: update,);
+                return ChatLIst(
+                  chats: state.chats,
+                  update: update,
+                  sendMessage: context.read<ChatCubit>().sendMessage,
+                );
               } else if (state is ChatInitial) {
                 context.read<ChatCubit>().getData();
               }

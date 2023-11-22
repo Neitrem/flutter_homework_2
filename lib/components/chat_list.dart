@@ -1,14 +1,16 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/chat_view.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';
-import 'package:flutter_application_1/domain/services/chat_service.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 
 class ChatLIst extends StatefulWidget {
   final List<ChatModel> chats;
   dynamic Function() update;
+  dynamic Function(ChatModel chat, String text) sendMessage;
 
-  ChatLIst({super.key, required this.chats, required this.update});
+  ChatLIst({super.key, required this.chats, required this.update, required this.sendMessage});
 
   @override
   State<ChatLIst> createState() => _ChatLIstState();
@@ -19,6 +21,12 @@ class _ChatLIstState extends State<ChatLIst> {
   Future<void> _pullRefresh() async {
     setState(() {
       widget.update();
+    });
+  }
+
+  void _sendMessage(ChatModel chat, String text) {
+    setState(() {
+      widget.sendMessage(chat, text);
     });
   }
 
@@ -35,7 +43,10 @@ class _ChatLIstState extends State<ChatLIst> {
           );
         },
         itemBuilder: (context, index) {
-          return ChatCard(model: widget.chats[index]);
+          return ChatCard(
+            model: widget.chats[index],
+            sendMessage: _sendMessage,
+          );
         },
         
       ),
@@ -45,8 +56,9 @@ class _ChatLIstState extends State<ChatLIst> {
 
 class ChatCard extends StatefulWidget {
   final ChatModel model;
+  dynamic Function(ChatModel chat, String text) sendMessage;
 
-  const ChatCard({super.key, required this.model});
+  ChatCard({super.key, required this.model, required this.sendMessage});
 
   @override
   State<ChatCard> createState() => _ChatCardState();
@@ -54,9 +66,9 @@ class ChatCard extends StatefulWidget {
 
 class _ChatCardState extends State<ChatCard> {
 
-  void update() {
+  void _sendMessage(String text) {
     setState(() {
-      
+      widget.sendMessage(widget.model, text);
     });
   }
 
@@ -65,14 +77,12 @@ class _ChatCardState extends State<ChatCard> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap:() {
-        
-        
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => ChatView(
               chat: widget.model,
-              updateParent: update,
+              sendMessage: _sendMessage,
             )
           ),
         );

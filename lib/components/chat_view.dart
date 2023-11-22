@@ -5,9 +5,9 @@ import 'package:flutter_application_1/styles/styles.dart';
 import 'dart:developer';
 
 class ChatView extends StatefulWidget {
-  dynamic Function() updateParent;
+  dynamic Function(String text) sendMessage;
   ChatModel chat;
-  ChatView({super.key, required this.chat, required this.updateParent});
+  ChatView({super.key, required this.chat, required this.sendMessage});
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -17,9 +17,7 @@ class _ChatViewState extends State<ChatView> {
 
  void addMessage(String message) {
   setState(() {
-    final int lastId = widget.chat.messages.first.id;
-    widget.chat.messages.insert(0, MessageModel.newMessage(lastId + 1, message, "you"));
-    widget.updateParent();
+    widget.sendMessage(message);
   });
  }
 
@@ -38,7 +36,7 @@ class _ChatViewState extends State<ChatView> {
           ),
           Expanded(
             flex: 1,
-            child: InputBar(addMessage: addMessage,),
+            child: InputBar(sendMessage: setState(widget.sendMessage),),
           ),
         ],
       ) 
@@ -47,8 +45,8 @@ class _ChatViewState extends State<ChatView> {
 }
 
 class InputBar extends StatefulWidget {
-  dynamic Function(String text) addMessage;
-  InputBar({super.key, required this.addMessage});
+  dynamic Function(String text) sendMessage;
+  InputBar({super.key, required this.sendMessage});
 
   @override
   State<InputBar> createState() => _InputBarState();
@@ -60,10 +58,12 @@ class _InputBarState extends State<InputBar> {
   final inputController = TextEditingController();
 
   void send() {
-    if (inputController.text.isNotEmpty) {
-      widget.addMessage(inputController.text);
-      inputController.clear();
-    }
+    setState(() {
+      if (inputController.text.isNotEmpty) {
+        widget.sendMessage(inputController.text);
+        inputController.clear();
+      }
+    });
   }
 
   @override

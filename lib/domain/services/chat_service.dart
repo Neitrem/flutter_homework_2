@@ -5,18 +5,25 @@ import 'package:flutter_application_1/domain/models/chat_model.dart';
 import 'package:flutter_application_1/domain/models/message_model.dart';
 
 extension MoveElement<T> on List<T> {
-    void move(int from, int to) {
-      RangeError.checkValidIndex(from, this, "from", length);
-      RangeError.checkValidIndex(to, this, "to", length);
-      var element = this[from];
-      if (from < to) {
-        this.setRange(from, to, this, from + 1);
-      } else {
-        this.setRange(to + 1, from + 1, this, to);
-      }
-      this[to] = element;
+  void move(int from, int to) {
+    RangeError.checkValidIndex(from, this, "from", length);
+    RangeError.checkValidIndex(to, this, "to", length);
+    var element = this[from];
+    if (from < to) {
+      setRange(from, to, this, from + 1);
+    } else {
+      setRange(to + 1, from + 1, this, to);
     }
+    this[to] = element;
   }
+}
+
+String getRandomString(int length) {
+  Random rnd = Random();
+  const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  return String.fromCharCodes(Iterable.generate(
+    length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length),),),);
+}
 
 class ChatService {
   final _repository = ChatRepository();
@@ -61,8 +68,6 @@ class ChatService {
     }
   }
 
-  
-
   void addNewMessage(ChatModel chat) {
     final int lastId;
     if (chat.messages.isNotEmpty) {
@@ -74,10 +79,14 @@ class ChatService {
     chat.messages.insert(0, MessageModel.newMessage(lastId + 1, getRandomString(10), "other"));
   }
 
-  String getRandomString(int length) {
-      Random rnd = Random();
-      const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-      return String.fromCharCodes(Iterable.generate(
-        length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length),),),);
+  void sendMessage(ChatModel chat, String text) {
+    final int lastId;
+    if (chat.messages.isNotEmpty) {
+      lastId = chat.messages.first.id;
+    } else {
+      lastId = 0;
     }
+    
+    chat.messages.insert(0, MessageModel.newMessage(lastId + 1, text, "you"));
+  }
 }
