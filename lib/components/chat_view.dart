@@ -15,13 +15,13 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
 
-//  void addMessage(String message) {
-//   setState(() {
-//     final int lastId = widget.chat.messages.first.id;
-//     widget.chat.messages.insert(0, MessageModel.newMessage(lastId + 1, message, "you"));
-//     widget.updateParent();
-//   });
-//  }
+ void addMessage(String message) {
+  setState(() {
+    final int lastId = widget.chat.messages.first.id;
+    widget.chat.messages.insert(0, MessageModel.newMessage(lastId + 1, message, "you"));
+  //widget.updateParent();
+  });
+ }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _ChatViewState extends State<ChatView> {
           ),
           Expanded(
             flex: 1,
-            child: InputBar(sendMessage: widget.sendMessage,),
+            child: InputBar(sendMessage: addMessage,),
           ),
         ],
       ) 
@@ -60,10 +60,13 @@ class _InputBarState extends State<InputBar> {
   final inputController = TextEditingController();
 
   void send() {
-    if (inputController.text.isNotEmpty) {
-      widget.sendMessage(inputController.text);
-      inputController.clear();
-    }
+    // setState(() {
+    //   if (inputController.text.isNotEmpty) {
+    //     widget.sendMessage(inputController.text);
+    //     inputController.clear();
+    //   }
+    // });
+    widget.sendMessage(inputController.text);
   }
 
   @override

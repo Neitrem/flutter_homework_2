@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/chat_view.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';
@@ -6,7 +8,7 @@ import 'package:flutter_application_1/styles/styles.dart';
 class ChatLIst extends StatefulWidget {
   final List<ChatModel> chats;
   dynamic Function() update;
-  dynamic Function(String text) sendMessage;
+  dynamic Function(ChatModel chat, String text) sendMessage;
 
   ChatLIst({super.key, required this.chats, required this.update, required this.sendMessage});
 
@@ -19,6 +21,12 @@ class _ChatLIstState extends State<ChatLIst> {
   Future<void> _pullRefresh() async {
     setState(() {
       widget.update();
+    });
+  }
+
+  void _sendMessage(ChatModel chat, String text) {
+    setState(() {
+      widget.sendMessage(chat, text);
     });
   }
 
@@ -37,7 +45,7 @@ class _ChatLIstState extends State<ChatLIst> {
         itemBuilder: (context, index) {
           return ChatCard(
             model: widget.chats[index],
-            sendMessage: widget.sendMessage,
+            sendMessage: _sendMessage,
           );
         },
         
@@ -48,7 +56,7 @@ class _ChatLIstState extends State<ChatLIst> {
 
 class ChatCard extends StatefulWidget {
   final ChatModel model;
-  dynamic Function(String text) sendMessage;
+  dynamic Function(ChatModel chat, String text) sendMessage;
 
   ChatCard({super.key, required this.model, required this.sendMessage});
 
@@ -60,7 +68,7 @@ class _ChatCardState extends State<ChatCard> {
 
   void _sendMessage(String text) {
     setState(() {
-      widget.sendMessage(text);
+      widget.sendMessage(widget.model, text);
     });
   }
 

@@ -27,7 +27,7 @@ class ChatCubit extends Cubit<ChatState> {
     _service.update(chats);
   }
 
-  Future<void> sendMessage(List<ChatModel> chats, String text, int chatId) async {
-    _service.sendMessage(chat)
+  Future<void> sendMessage(ChatModel chat, String text) async {
+    _service.sendMessage(chat, text);
   }
 }
