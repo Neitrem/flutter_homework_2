@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/chat_view.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';

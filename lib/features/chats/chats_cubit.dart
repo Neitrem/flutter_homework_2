@@ -1,5 +1,4 @@
 import 'package:flutter_application_1/domain/models/chat_model.dart';
-import 'package:flutter_application_1/domain/models/message_model.dart';
 import 'package:flutter_application_1/domain/services/chat_service.dart';
 import 'package:flutter_application_1/features/chats/chat_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

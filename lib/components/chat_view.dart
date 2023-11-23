@@ -36,7 +36,7 @@ class _ChatViewState extends State<ChatView> {
           ),
           Expanded(
             flex: 1,
-            child: InputBar(sendMessage: setState(widget.sendMessage),),
+            child: InputBar(sendMessage: widget.sendMessage,),
           ),
         ],
       ) 
