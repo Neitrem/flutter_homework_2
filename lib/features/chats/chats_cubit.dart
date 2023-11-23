@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   List<ChatModel> chats = [];
+
   ChatCubit() : super(ChatInitial());
 
   final _service = ChatService();
@@ -18,18 +19,41 @@ class ChatCubit extends Cubit<ChatState> {
       );
     } catch (e) {
       emit(
-        ChatError(error: e.toString(),),
+        ChatError(
+          error: e.toString(),
+        ),
       );
     }
   }
 
   Future<void> update() async {
     _service.update(chats);
-    emit(ChatData(chats: chats),);
+    emit(
+      ChatData(chats: chats),
+    );
   }
 
   Future<void> sendMessage(ChatModel chat, String text) async {
     _service.sendMessage(chat, text);
-    emit(ChatData(chats: chats),);
+    emit(
+      ChatData(chats: chats),
+    );
+  }
+
+  void rebuild() {
+    emit(
+      ChatData(chats: chats),
+    );
+  }
+}
+
+class ChatViewCubit extends Cubit<ChatViewState> {
+  final ChatModel model;
+  ChatViewCubit(this.model) : super(ChatViewInitial());
+
+  final _service = ChatService();
+
+  void rebuild() {
+    emit(Rebuild());
   }
 }

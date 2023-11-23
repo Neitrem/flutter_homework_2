@@ -5,24 +5,17 @@ import 'package:flutter_application_1/features/chats/chats_cubit.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatLIst extends StatefulWidget {
+class ChatLIst extends StatelessWidget {
   final List<ChatModel> chats;
-  final dynamic Function() update;
 
-  const ChatLIst({super.key, required this.chats, required this.update});
-
-  @override
-  State<ChatLIst> createState() => _ChatLIstState();
-}
-
-class _ChatLIstState extends State<ChatLIst> {
+  const ChatLIst({super.key, required this.chats});
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: context.read<ChatCubit>().update,
       child: ListView.separated(
-        itemCount: widget.chats.length,
+        itemCount: chats.length,
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             indent: 90.0,
@@ -30,42 +23,33 @@ class _ChatLIstState extends State<ChatLIst> {
         },
         itemBuilder: (context, index) {
           return ChatCard(
-            model: widget.chats[index],
+            model: chats[index],
           );
         },
-        
       ),
     );
   }
 }
 
-class ChatCard extends StatefulWidget {
+class ChatCard extends StatelessWidget {
   final ChatModel model;
 
-
   const ChatCard({super.key, required this.model});
-
-  @override
-  State<ChatCard> createState() => _ChatCardState();
-}
-
-class _ChatCardState extends State<ChatCard> {
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap:() {
-        Navigator.push(
+      onTap: () {
+        Navigator.push<String?>(
           context,
           MaterialPageRoute(
             builder: (_) => ChatView(
-              chat: widget.model,
-            )
+              chat: model,
+            ),
           ),
-        );
-        setState(() {
-          widget.model.readAll();
+        ).then((value) {
+          context.read<ChatCubit>().rebuild();
         });
       },
       child: Padding(
@@ -75,7 +59,10 @@ class _ChatCardState extends State<ChatCard> {
           children: [
             Row(
               children: <Widget>[
-                const Icon(Icons.person, size: 60,),
+                const Icon(
+                  Icons.person,
+                  size: 60,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Column(
@@ -83,12 +70,12 @@ class _ChatCardState extends State<ChatCard> {
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        widget.model.name,
+                        model.name,
                         style: chatTitleStyle,
                         textAlign: TextAlign.left,
                       ),
                       Text(
-                        widget.model.messages.first.text,
+                        model.messages.first.text,
                         style: chatLastMessStyle,
                         textAlign: TextAlign.left,
                       ),
@@ -101,8 +88,8 @@ class _ChatCardState extends State<ChatCard> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Text(widget.model.messages.last.time),
-                if (widget.model.unreadCount > 0)
+                Text(model.messages.last.time),
+                if (model.unreadCount > 0)
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: const BoxDecoration(
@@ -110,10 +97,9 @@ class _ChatCardState extends State<ChatCard> {
                       shape: BoxShape.circle,
                     ),
                     child: Text(
-                      widget.model.unreadCount.toString(),
+                      model.unreadCount.toString(),
                     ),
                   ),
-               
               ],
             )
           ],

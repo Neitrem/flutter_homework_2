@@ -5,8 +5,6 @@ import 'package:flutter_application_1/features/chats/chats_cubit.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
 
@@ -15,8 +13,6 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatState extends State<ChatPage> {
-  final ChatCubit cubit =  ChatCubit();
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,31 +41,22 @@ class _ChatState extends State<ChatPage> {
             },
             buildWhen: (previous, current) => current is ChatBuildState,
             builder: (context, state) {
-              
-
-              if(state is ChatLoading) {
+              if (state is ChatLoading) {
                 return const Center(
                   child: CircularProgressIndicator(
                     color: Colors.red,
                   ),
                 );
-              } else if(state is ChatData) {
-                void update() {
-                  context.read<ChatCubit>().update();
-                }
+              } else if (state is ChatData) {
                 return ChatLIst(
                   chats: state.chats,
-                  update: update,
                 );
-              } else if (state is ChatInitial) {
-                context.read<ChatCubit>().getData();
               }
               return const Text("Error");
             },
           ),
-        )
+        ),
       ),
     );
   }
 }
-
