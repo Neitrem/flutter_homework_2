@@ -29,7 +29,7 @@ class ChatService {
   final _repository = ChatRepository();
 
   Future<List<ChatModel>> getChats() async {
-    Future.delayed(const Duration(seconds: 1), () {});
+    await Future.delayed(const Duration(seconds: 1));
     final list = await _repository.getChats();
     if (list==null) return [];
     return list.map((e) => ChatModel.fromDTO(e)).toList();

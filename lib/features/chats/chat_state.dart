@@ -21,3 +21,11 @@ final class ChatData extends ChatBuildState {
 
   ChatData({required this.chats});
 }
+
+sealed class ChatViewState {}
+
+final class ChatViewBuildState extends ChatViewState {}
+
+final class ChatViewInitial extends ChatViewBuildState {}
+
+final class Rebuild extends ChatViewBuildState {}
