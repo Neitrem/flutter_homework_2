@@ -5,10 +5,10 @@ import 'package:flutter_application_1/styles/styles.dart';
 
 class ChatLIst extends StatefulWidget {
   final List<ChatModel> chats;
-  dynamic Function() update;
-  dynamic Function(ChatModel chat, String text) sendMessage;
+  final dynamic Function() update;
+  final dynamic Function(ChatModel chat, String text) sendMessage;
 
-  ChatLIst({super.key, required this.chats, required this.update, required this.sendMessage});
+  const ChatLIst({super.key, required this.chats, required this.update, required this.sendMessage});
 
   @override
   State<ChatLIst> createState() => _ChatLIstState();
@@ -54,9 +54,9 @@ class _ChatLIstState extends State<ChatLIst> {
 
 class ChatCard extends StatefulWidget {
   final ChatModel model;
-  dynamic Function(ChatModel chat, String text) sendMessage;
+  final dynamic Function(ChatModel chat, String text) sendMessage;
 
-  ChatCard({super.key, required this.model, required this.sendMessage});
+  const ChatCard({super.key, required this.model, required this.sendMessage});
 
   @override
   State<ChatCard> createState() => _ChatCardState();

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';
 import 'package:flutter_application_1/domain/models/message_model.dart';
 import 'package:flutter_application_1/styles/styles.dart';
-import 'dart:developer';
 
 class ChatView extends StatefulWidget {
-  dynamic Function(String text) sendMessage;
-  ChatModel chat;
-  ChatView({super.key, required this.chat, required this.sendMessage});
+  final Function(String text) sendMessage;
+  final ChatModel chat;
+  const ChatView({super.key, required this.chat, required this.sendMessage});
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -45,8 +44,8 @@ class _ChatViewState extends State<ChatView> {
 }
 
 class InputBar extends StatefulWidget {
-  dynamic Function(String text) sendMessage;
-  InputBar({super.key, required this.sendMessage});
+  final dynamic Function(String text) sendMessage;
+  const InputBar({super.key, required this.sendMessage});
 
   @override
   State<InputBar> createState() => _InputBarState();
@@ -103,8 +102,8 @@ class _InputBarState extends State<InputBar> {
 }
 
 class MessageList extends StatefulWidget {
-  List<MessageModel> messages;
-  MessageList({super.key, required this.messages});
+  final List<MessageModel> messages;
+  const MessageList({super.key, required this.messages});
 
   @override
   State<MessageList> createState() => _MessageListState();
