@@ -28,7 +28,7 @@ class _ChatState extends State<ChatPage> {
       ),
       body: Center(
         child: BlocProvider(
-          create: (context) => ChatCubit(),
+          create: (context) => ChatCubit()..getData(),
           child: BlocConsumer<ChatCubit, ChatState>(
             listener: (context, state) {
               if (state is ChatError) {
@@ -55,12 +55,11 @@ class _ChatState extends State<ChatPage> {
                 );
               } else if(state is ChatData) {
                 void update() {
-                  context.read<ChatCubit>().update(state.chats);
+                  context.read<ChatCubit>().update();
                 }
                 return ChatLIst(
                   chats: state.chats,
                   update: update,
-                  sendMessage: context.read<ChatCubit>().sendMessage,
                 );
               } else if (state is ChatInitial) {
                 context.read<ChatCubit>().getData();

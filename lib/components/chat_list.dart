@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/chat_view.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';
+import 'package:flutter_application_1/features/chats/chats_cubit.dart';
 import 'package:flutter_application_1/styles/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatLIst extends StatefulWidget {
   final List<ChatModel> chats;
   final dynamic Function() update;
-  final dynamic Function(ChatModel chat, String text) sendMessage;
 
-  const ChatLIst({super.key, required this.chats, required this.update, required this.sendMessage});
+  const ChatLIst({super.key, required this.chats, required this.update});
 
   @override
   State<ChatLIst> createState() => _ChatLIstState();
@@ -16,23 +17,10 @@ class ChatLIst extends StatefulWidget {
 
 class _ChatLIstState extends State<ChatLIst> {
 
-  Future<void> _pullRefresh() async {
-    setState(() {
-      widget.update();
-    });
-  }
-
-  void _sendMessage(ChatModel chat, String text) {
-    setState(() {
-      widget.sendMessage(chat, text);
-    });
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: _pullRefresh,
+      onRefresh: context.read<ChatCubit>().update,
       child: ListView.separated(
         itemCount: widget.chats.length,
         separatorBuilder: (BuildContext context, int index) {
@@ -43,7 +31,6 @@ class _ChatLIstState extends State<ChatLIst> {
         itemBuilder: (context, index) {
           return ChatCard(
             model: widget.chats[index],
-            sendMessage: _sendMessage,
           );
         },
         
@@ -54,21 +41,15 @@ class _ChatLIstState extends State<ChatLIst> {
 
 class ChatCard extends StatefulWidget {
   final ChatModel model;
-  final dynamic Function(ChatModel chat, String text) sendMessage;
 
-  const ChatCard({super.key, required this.model, required this.sendMessage});
+
+  const ChatCard({super.key, required this.model});
 
   @override
   State<ChatCard> createState() => _ChatCardState();
 }
 
 class _ChatCardState extends State<ChatCard> {
-
-  void _sendMessage(String text) {
-    setState(() {
-      widget.sendMessage(widget.model, text);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +61,6 @@ class _ChatCardState extends State<ChatCard> {
           MaterialPageRoute(
             builder: (_) => ChatView(
               chat: widget.model,
-              sendMessage: _sendMessage,
             )
           ),
         );

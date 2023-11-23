@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/domain/models/chat_model.dart';
 import 'package:flutter_application_1/domain/models/message_model.dart';
+import 'package:flutter_application_1/features/chats/chats_cubit.dart';
 import 'package:flutter_application_1/styles/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatView extends StatefulWidget {
-  final Function(String text) sendMessage;
+  //final Function(String text) sendMessage;
   final ChatModel chat;
-  const ChatView({super.key, required this.chat, required this.sendMessage});
+  //const ChatView({super.key, required this.chat, required this.sendMessage});
+  const ChatView({super.key, required this.chat});
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -14,10 +17,8 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
 
- void addMessage(String message) {
-  setState(() {
-    widget.sendMessage(message);
-  });
+ void _sendMessage(String text) {
+    context.read<ChatCubit>().sendMessage(widget.chat, text);
  }
 
   @override
@@ -35,7 +36,7 @@ class _ChatViewState extends State<ChatView> {
           ),
           Expanded(
             flex: 1,
-            child: InputBar(sendMessage: widget.sendMessage,),
+            child: InputBar(sendMessage: _sendMessage,),
           ),
         ],
       ) 
@@ -57,12 +58,10 @@ class _InputBarState extends State<InputBar> {
   final inputController = TextEditingController();
 
   void send() {
-    setState(() {
-      if (inputController.text.isNotEmpty) {
-        widget.sendMessage(inputController.text);
-        inputController.clear();
-      }
-    });
+    if (inputController.text.isNotEmpty) {
+      widget.sendMessage(inputController.text);
+      inputController.clear();
+    }
   }
 
   @override
